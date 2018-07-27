@@ -74,5 +74,8 @@ TODO
 
 ## Future work
 - Allow installing as a library via setuptools
-- Add docstrings to functions
 - Create TIFF with gdal
+- Exception handling in case bad input is provided
+
+## Assumptions
+- Calibration spacing is an integer
