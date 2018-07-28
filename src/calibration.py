@@ -60,9 +60,9 @@ def _read_calibration_info(fd):
     ----------
     fd : IO stream
         The stream should contain a json serialization of the
-        calibration vector.
+        calibration vector information.
 
-        The expected format of this file is the following:
+        The expected format of this information is the following:
         {
             "calibration_info":
             {
@@ -91,6 +91,7 @@ def _calibrate_matrix(matrix, vector):
     ----------
     matrix : numpy 2D array
         The intial image matrix.
+
     vector : numpy 1D array
         The compensation vector to apply.
 
@@ -110,14 +111,20 @@ def _interpolate_vector(vector, spacing, target_size):
     ----------
     vector : array-like
         The vector to interpolate from.
+
     spacing: int
+        Distance between samples in the original vector.
+        spacing = 1 if the vector is not subsampled and does not need
+        to be interpolated.
+        spacing > 1 otherwise.
+
     target_size: int
         The size of the interpolated vector.
 
     Returns
     -------
     Result : numpy array
-        The new, interpolated vector.
+        The interpolated vector.
     """
 
     return np.interp(range(target_size),
