@@ -1,5 +1,4 @@
-"""
-Module that allows applying calibration vectors to images.
+"""Module that allows calibrating image matrices using calibration vectors.
 
 The calibration formula is Γ² = γ * α² where Γ is the calibrated
 matrix, γ is the uncorrected matrix, and α is the calibration vector.
@@ -13,6 +12,9 @@ applied.
 
 import json
 import numpy as np
+
+
+version = "1"
 
 
 def apply_calibration(calibration_filename, image_matrix):
