@@ -73,7 +73,7 @@ python generate_image_from_matrix.py calibrated_image_matrix.json image.tif
 
 
 This is the (zoomed in) resulting image:  
-![](doc/image.tif)
+![](doc/image.png)
 
 
 ## Tests
