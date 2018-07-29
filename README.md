@@ -3,42 +3,32 @@
 This repository contains code that provides a solution to a recruitment test provided by Planet.  
 The test description can be found [here](test-description.md).
 
+
 ## Prerequisites
 
-Running the code requires `numpy`, and running the tests also requires `nose`. An _environment.yml_ file is provided for installing the dependencies with `conda`.  
+### Conda
+
+Running the code requires `numpy` and `gdal`, and running the tests also requires `nose`. An _environment.yml_ file is provided for installing the dependencies with `conda`.  
 Create the `planet-test` conda environment from the provided _environment.yml_ file:
 ```sh
 conda env create -f environment.yml
 ```
 
 
-## Command-line tool
+## Command-line tools
 
-A command-line wrapper around the calibration module is provided. It can be used as follows:
+### Image matrix calibration
+A command-line wrapper around the `image_matrix_calibration` module is provided. It can be used as follows to generate a calibrated matrix and store it in a json file; example files are provided in the _example_data_ folder:
 ```sh
-python calibrate_image_matrix.py calibration_params.json image_matrix.json
+python calibrate_image_matrix.py example_data/calibration_params.json example_data/image_matrix.json > calibrated_image_matrix.json
 ```
 
-This assumes that the files _calibration_params.json_ and _image_matrix.json_ are formatted as follows:
 
-_calibration_params.json_
-```json
-{
-    "calibration_info": {
-        "calibration_spacing": 2,
-        "calibration_vector": [0.65, 0.7, 0.75]
-    }
-}
-```
+### TIFF Image generation
 
-_image_matrix.json_
-```json
-[[7.10059172, 6.58436214, 6.12244898, 5.70749108, 5.33333333],
- [26.03550296, 24.14266118, 22.44897959, 20.9274673, 19.55555556],
- [73.37278107, 68.03840878, 63.26530612, 58.97740785, 55.11111111],
- [163.31360947, 151.44032922, 140.81632653, 131.27229489, 122.6666667],
- [2.36686391, 2.19478738, 2.04081633, 1.90249703, 1.77777778],
- [49.70414201, 46.09053498, 42.85714286, 39.95243757, 37.33333333]]
+To visualize the output matrix, the `generate_image_from_matrix` command-line tool is provided. It first scales all the pixel values to fill the range [0; 255], then uses the `gdal` module to create an image with 3 bands, compressed with LZW and whose values are unsigned ints. It can be used as follows:
+```sh
+python generate_image_from_matrix.py calibrated_image_matrix.json image.tif
 ```
 
 
@@ -68,14 +58,19 @@ python -m flake8
 ```
 
 
-## Install and use as a library
-
-TODO
-
 ## Future work
 - Allow installing as a library via setuptools
-- Create TIFF with gdal
 - Exception handling in case bad input is provided
+- Allow image transformations, for example using larger pixels if the image is too small
+- Provide a Dockerfile
+
 
 ## Assumptions
 - Calibration spacing is an integer
+- Matrix contains only positive numbers
+
+
+## Difficulties
+
+While completing this assignment, the biggest difficulty was finding documentation for the python `gdal` module, for example regarding how to pass the `COMPRESS=LZW` option, or about whether there was an equivalent to `GDALClose()` that needed to be called after writing to the image file.  
+In the end, StackOverflow was my most useful resource, as is so often the case.
