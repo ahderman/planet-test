@@ -11,6 +11,8 @@ The test description can be found [here](doc/test-description.md).
 While completing this assignment, the biggest difficulty was finding documentation for the python `gdal` module, for example regarding how to pass the `COMPRESS=LZW` option, or about whether there was an equivalent to `GDALClose()` that needed to be called after writing to the image file.  
 In the end, StackOverflow was my most useful resource, as is so often the case.
 
+In addition, I do find it surprising that in the formula `Γ² = γ * α²`, the calibrated matrix is squared while the uncalibrated one isn't. I'd like to understand this better.
+
 ### Documentation
 
 For docstrings, I have copied the format used by `pandas`, but I'm not sure it's very standard and I haven't tried parsing it with a tool to ensure the output is what I expect. I might try reStructuredText next time.
@@ -22,8 +24,9 @@ I wanted to create a conda module using `conda-build`, because I could then spec
 ### Assumptions
 
 I have made a few assumptions regarding the input data:
-- Calibration spacing is an integer
-- Matrix contains only positive numbers
+- Calibration spacing is an integer.
+- The image matrix contains only positive numbers.
+- I have understood the maths correctly (see above, in the _Difficulties_ section).
 
 ### Future work
 
