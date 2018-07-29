@@ -1,11 +1,11 @@
 import json
 import numpy as np
-from numpy.testing import assert_equal, \
-                          assert_allclose
-from calibration import _interpolate_vector, \
-                        _calibrate_matrix, \
-                        apply_calibration
+from numpy.testing import assert_equal, assert_allclose
 import tempfile
+
+from image_matrix_calibration import _interpolate_vector, \
+                                     _calibrate_matrix, \
+                                     apply_calibration
 
 
 def test_interpolate_vector():
