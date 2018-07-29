@@ -4,7 +4,10 @@ import json
 import numpy as np
 import sys
 
-from src import image_matrix_calibration as calibration
+try:
+    import image_matrix_calibration as calibration
+except ImportError:
+    from src import image_matrix_calibration as calibration
 
 
 def main():
