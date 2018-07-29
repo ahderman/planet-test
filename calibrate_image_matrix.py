@@ -10,8 +10,7 @@ except ImportError:
     from src import image_matrix_calibration as calibration
 
 
-def main():
-
+def calibrate_image_matrix():
     calibration_filename = sys.argv[1]
     image_matrix_filename = sys.argv[2]
     image_matrix = []
@@ -32,4 +31,4 @@ if __name__ == '__main__':
         print(usage)
         exit(2)
 
-    main()
+    calibrate_image_matrix()
