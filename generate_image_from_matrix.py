@@ -31,7 +31,14 @@ def write_matrix_to_image(matrix_file_path, image_file_path):
     dataset.GetRasterBand(3).WriteArray(matrix_3)
 
 
+usage = f"""{__file__} <image_matrix_filename> <image_filename>
+"""
+
 if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print(usage)
+        exit(2)
+
     matrix_file_path = sys.argv[1]
     image_file_path = sys.argv[2]
     write_matrix_to_image(matrix_file_path, image_file_path)
