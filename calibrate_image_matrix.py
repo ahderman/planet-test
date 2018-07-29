@@ -4,7 +4,7 @@ import json
 import numpy as np
 import sys
 
-from src import calibration
+from src import image_matrix_calibration as calibration
 
 
 def main():
