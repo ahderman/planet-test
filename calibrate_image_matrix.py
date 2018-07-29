@@ -18,7 +18,7 @@ def main():
 
     calibrated_matrix = calibration.apply_calibration(calibration_filename,
                                                       image_matrix)
-    print(calibrated_matrix.tolist())
+    print(json.dumps(calibrated_matrix.tolist()))
 
 
 usage = f"""{__file__} <calibration_filename> <image_matrix_filename>
